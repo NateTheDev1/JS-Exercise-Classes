@@ -85,6 +85,22 @@ class Car {
     this.tank = 0;
     this.odometer = 0;
   }
+
+  fill(gallons) {
+    this.tank += gallons;
+  }
+
+  drive(distance) {
+    const gasToUse = distance / this.milesPerGallon;
+    if (gasToUse < this.tank) {
+      this.tank -= gasToUse;
+      this.odometer += distance;
+    } else {
+      this.odometer = this.tank * this.milesPerGallon + this.odometer;
+      this.tank = 0;
+      return `I ran out of fuel at  ${this.odometer} miles!`;
+    }
+  }
 }
 
 /*
@@ -100,7 +116,20 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
+  obj = {
+    name: "", 
+    age: "",
+    location: ""
+  }
+  constructor(obj) {
+    this.name = obj.name;
+    this.age = obj.age;
+    this.location = obj.location;
+  }
 
+  speak() {
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+  }
 }
 
 /*
@@ -117,8 +146,29 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
+class Instructor extends Lambdasian{
+  props = {
+    name: "",
+    age: "",
+    location: "",
+    specialty: "",
+    favLanguage: "",
+    catchPhrase: ""
+  }
+  constructor(props) {
+    super(props);
+    this.specialty = props.specialty;
+    this.favLanguage = props.favLanguage;
+    this.catchPhrase = props.catchPhrase;
+  }
 
+  demo(subject) {
+    return `Today we are learning about ${subject}`
+  }
+
+  grade(student, subject) {
+    return `${student.name} recieves a perfect score on ${subject}`;
+  }
 }
 
 /*
