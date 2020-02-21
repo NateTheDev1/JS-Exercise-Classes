@@ -48,7 +48,7 @@ class Person {
   }
 
   eat(food) {
-    if(this.stomach.length < 10) {
+    if (this.stomach.length < 10) {
       this.stomach.push(food);
     }
   }
@@ -61,7 +61,6 @@ class Person {
     const tostring = this.name + ", " + this.age;
     return tostring;
   }
-
 }
 
 /*
@@ -117,10 +116,10 @@ class Car {
 */
 class Lambdasian {
   obj = {
-    name: "", 
+    name: "",
     age: "",
     location: ""
-  }
+  };
   constructor(obj) {
     this.name = obj.name;
     this.age = obj.age;
@@ -128,7 +127,7 @@ class Lambdasian {
   }
 
   speak() {
-    return `Hello my name is ${this.name}, I am from ${this.location}`
+    return `Hello my name is ${this.name}, I am from ${this.location}`;
   }
 }
 
@@ -146,7 +145,7 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor extends Lambdasian{
+class Instructor extends Lambdasian {
   props = {
     name: "",
     age: "",
@@ -154,7 +153,7 @@ class Instructor extends Lambdasian{
     specialty: "",
     favLanguage: "",
     catchPhrase: ""
-  }
+  };
   constructor(props) {
     super(props);
     this.specialty = props.specialty;
@@ -163,11 +162,23 @@ class Instructor extends Lambdasian{
   }
 
   demo(subject) {
-    return `Today we are learning about ${subject}`
+    return `Today we are learning about ${subject}`;
   }
 
   grade(student, subject) {
     return `${student.name} recieves a perfect score on ${subject}`;
+  }
+
+  randomGrade(student) {
+    const max = 100 - student.grade;
+    const option = Math.floor(Math.random() * (2 - 1 + 1) + 1);
+    if (student.grade !== 100) {
+      if (option === 1) {
+        student.grade += Math.floor(Math.random() * (max - 0 + 1) + 0);
+      } else {
+        student.grade -= Math.floor(Math.random() * (max - 0 + 1) + 0);
+      }
+    }
   }
 }
 
@@ -186,15 +197,16 @@ class Instructor extends Lambdasian{
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student extends Lambdasian{
+class Student extends Lambdasian {
   props = {
-    name: "", 
+    name: "",
     age: "",
     location: "",
     previousBackground: "",
     className: "",
-    favSubjects: []
-  }
+    favSubjects: [],
+    grade: 99
+  };
   constructor(props) {
     super(props);
     this.previousBackground = props.previousBackground;
@@ -203,19 +215,27 @@ class Student extends Lambdasian{
   }
 
   listSubjects() {
-    let subjects = '';
-    const fav = this.favSubjects.forEach((s) => {
+    let subjects = "";
+    const fav = this.favSubjects.forEach(s => {
       subjects += `${s}, `;
-    })
+    });
     return subjects;
   }
 
   PRAssignment(subject) {
-    return `${this.name} has submitted a PR for ${subject}`
+    return `${this.name} has submitted a PR for ${subject}`;
   }
 
   sprintChallenge(subject) {
-    return `${this.name} has begun sprint challenge on ${subject}`
+    return `${this.name} has begun sprint challenge on ${subject}`;
+  }
+
+  graduate() {
+    if (this.props.grade > 70) {
+      return `${this.props.name} has graduated!`;
+    } else {
+      return `Unfortunately you have to have a grade above 70 to graduate, your grade is a ${this.props.grade}`;
+    }
   }
 }
 
@@ -232,7 +252,7 @@ class Student extends Lambdasian{
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager extends Instructor{
+class ProjectManager extends Instructor {
   props = {
     name: "",
     age: "",
@@ -242,7 +262,7 @@ class ProjectManager extends Instructor{
     catchPhrase: "",
     gradClassName: "",
     favInstructor: ""
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -251,11 +271,11 @@ class ProjectManager extends Instructor{
   }
 
   standUp(channel) {
-    return `${this.name} announces to ${channel}, @channel standy times!`
+    return `${this.name} announces to ${channel}, @channel standy times!`;
   }
 
   debugsCode(student, subject) {
-    return `${this.name} debugs ${student.name}'s code on ${subject}`
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
   }
 }
 
@@ -271,13 +291,27 @@ class ProjectManager extends Instructor{
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
-if (typeof exports !== 'undefined') {
-  module.exports = module.exports || {}
-  if (Airplane) { module.exports.Airplane = Airplane }
-  if (Person) { module.exports.Person = Person }
-  if (Car) { module.exports.Car = Car }
-  if (Lambdasian) { module.exports.Lambdasian = Lambdasian }
-  if (Instructor) { module.exports.Instructor = Instructor }
-  if (Student) { module.exports.Student = Student }
-  if (ProjectManager) { module.exports.ProjectManager = ProjectManager }
+if (typeof exports !== "undefined") {
+  module.exports = module.exports || {};
+  if (Airplane) {
+    module.exports.Airplane = Airplane;
+  }
+  if (Person) {
+    module.exports.Person = Person;
+  }
+  if (Car) {
+    module.exports.Car = Car;
+  }
+  if (Lambdasian) {
+    module.exports.Lambdasian = Lambdasian;
+  }
+  if (Instructor) {
+    module.exports.Instructor = Instructor;
+  }
+  if (Student) {
+    module.exports.Student = Student;
+  }
+  if (ProjectManager) {
+    module.exports.ProjectManager = ProjectManager;
+  }
 }
